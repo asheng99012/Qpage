@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>核心类库篇</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///C:\Users\ashen\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.1\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      <link rel="stylesheet" href="file:///C:\Users\ashen\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.1\node_modules\@shd101wyy\mume\dependencies\mermaid\mermaid.css">
+      
+      
+      
+      
+      <script type="text/javascript" src="file:///C:\Users\ashen\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.3.1\node_modules\@shd101wyy\mume\dependencies\mermaid\mermaid.min.js"></script>
+      
+      
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h2 class="mume-header" id="qpagebase">Qpage.base</h2>
+
+<blockquote>
+<ul>
+<li>最基础的类库，使用Class.define 方法定义的类</li>
+<li>它定义了基本的流程以及基础的方法以及规范</li>
+<li>它的任何方法都可以在子类中被覆盖重写</li>
+<li>本类借鉴了模块化开发的思想，实例化此类时，需指定一个 root 的dom 元素，此实例化的类只会接管 root 节点内的dom元素。root默认为 body</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法：</h3>
+
+<pre class="language-javascript">    <span class="token comment" spellcheck="true">/*
+     * 通过main方法来生成一个继承 Qbase.base 的匿名类，
+     * 并实例化这个匿名类，执行 init 方法
+     */</span>
+    Qpage<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">/</span>
+     <span class="token operator">*</span> 也可以通过定义一个继承自 Qbase<span class="token punctuation">.</span>base 的类，再实例化这个类
+     <span class="token operator">*</span><span class="token operator">/</span>
+    <span class="token keyword">var</span> _class <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Class</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        extend<span class="token punctuation">:</span>Qbase<span class="token punctuation">.</span>base<span class="token punctuation">,</span>
+        p_add_click<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//rootEl 是一个 dom 节点，类似于 Vue 中的 el</span>
+    <span class="token keyword">var</span> instant<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">_class</span><span class="token punctuation">(</span>rootEl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    instant<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h3 class="mume-header" id="%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%88%96%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF">基本流程或生命周期是：</h3>
+
+<blockquote>
+<blockquote>
+<ul>
+<li>实例化的时候会执行 <code>initialize</code> 方法，在这个方法中会初始化各种组件，比如 <code>日期</code> 、<code>多选</code>、<code>suggest</code>、等 jquery ui 或 bootstrap 组件；同时，也会初始化 <code>面包屑导航栏</code>；也会定义好事件调用机制</li>
+<li>调用 <code>init(data)</code> 方法，在这个方法里，会初始化各个 <code>input</code>、<code>组件</code>、等元素的默认值。这些值从哪儿来呢？优先用调用此方法时传过来的数据；如果么有，则从页面保存的状态中取；如果还没，则从 url 参数中取；如果还没，则不初始化默认值</li>
+</ul>
+</blockquote>
+</blockquote>
+<h3 class="mume-header" id="%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6">事件机制</h3>
+
+<blockquote>
+<ul>
+<li>事件的命名规则为：<code>p_元素标志_事件类型(e,el)</code></li>
+<li>元素标志是元素的 <code>name</code>、<code>id</code>、<code>action</code> 等属性的值的任意一种，也可以通过覆盖 <code>v_selector</code> 自定义复杂的选择器</li>
+<li>事件类型有：<code>click</code> <code>focusin</code> <code>focusou</code>t <code>mouseenter</code> <code>mouseleave</code> <code>change</code> <code>keyup</code> <code>keydown</code> 等 jquery支持的事件，也可以通过覆盖 <code>v_eventBindType</code> 方法，使其支持其他jquery支持的事件</li>
+<li>事件机制是使用jquery的 <code>live</code> 机制实现的，所以，不管dom元素是实例化时就有的，还是通过js动态生成的，都可以用这种方法定义事件</li>
+<li>参数 <code>e</code> 代表 jquery 事件中的 <code>e</code> ，<code>el</code> 代触发此事件的 dom 元素，即 <code>e.target</code><br>
+示例如下：</li>
+</ul>
+</blockquote>
+<pre class="language-javascript">   Qpage<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     p_upate_click<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span>el<span class="token punctuation">)</span><span class="token punctuation">{</span>
+         e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token punctuation">[</span>e<span class="token punctuation">,</span>el<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h3 class="mume-header" id="%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84%E6%96%B9%E6%B3%95">一些重要的方法</h3>
+
+<h4 class="mume-header" id="_p_setdatadata_"><em>p_setData(data)</em></h4>
+
+<p><code>init</code> 方法就是通过这个方法给各个dom元素或组件赋值的，此方法采用了mvp的设计思路，可以一次性给所有的元素赋值，只要元素的 <code>name</code> 或 <code>id</code> 的值与 <code>data</code> 中的key的值能对应上即可。<br>
+赋值的同时，也会触发dom元素的 change 事件，从而触发它们的联动事件</p>
+<h4 class="mume-header" id="_p_getdata_"><em>p_getData()</em></h4>
+
+<p>获取 <code>root</code> 内所有的 <code>input</code> 元素的值，如果需要对某些dom元素的做一些特殊的处理，可以覆盖此方法，示例如下：</p>
+<pre class="language-javascript">   Qpage<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     p_getData<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// 可以通过 this.parent()  调用父类的  p_getData 方法</span>
+         <span class="token keyword">var</span> data<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">//todo  对 data 做一些特殊处理</span>
+         <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h4 class="mume-header" id="_p_validateel_"><em>p_validate(el)</em></h4>
+
+<p>验证 <code>root</code> 内 <code>input</code> 的值是否符合规则<br>
+当某 <code>input</code> 的值发生改变时，会触发此方法，但只验证当前 <code>input</code> 的值是否符合规则<br>
+当需要提交到服务端时，如点击 <code>保存</code> 按钮，会触发此方法，此时，会验证 <code>root</code> 内所有 <code>input</code> 的值是否符合规则</p>
+<h4 class="mume-header" id="_p_getvalidaterule_"><em>p_getValidateRule()</em></h4>
+
+<p>返回各个dom元素的值的验证规则</p>
+<pre class="language-javascript">   Qpage<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+     p_getValidateRule<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token keyword">return</span> <span class="token punctuation">{</span>
+             <span class="token comment" spellcheck="true">//某个元素可能需要多个验证规则，所以这个地方是数组</span>
+            mobile<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{</span>
+                reg<span class="token punctuation">:</span><span class="token regex">/^\d{11}$/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//正则</span>
+                msg<span class="token punctuation">:</span><span class="token string">"手机号不正确"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            pwd<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{</span>
+                reg<span class="token punctuation">:</span><span class="token regex">/^.{6,20}$/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//正则</span>
+                msg<span class="token punctuation">:</span><span class="token string">"密码格式不正确"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            confirm_pwd<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{</span>
+                reg<span class="token punctuation">:</span><span class="token regex">/^.{6,20}$/</span><span class="token punctuation">,</span> <span class="token comment" spellcheck="true">//正则</span>
+                msg<span class="token punctuation">:</span><span class="token string">"确认密码不能为空"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">//当某个验证规则很难用正则来表示时，可以用function来写验证逻辑</span>
+                <span class="token comment" spellcheck="true">// val 代表当前 input 元素的值</span>
+                <span class="token comment" spellcheck="true">// el 代表当前input 元素</span>
+                <span class="token comment" spellcheck="true">// data 代表root内所有 input 的值</span>
+                cb_reg<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span>val<span class="token punctuation">,</span>el<span class="token punctuation">,</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>                    
+                    <span class="token keyword">return</span> val<span class="token operator">===</span>data<span class="token punctuation">.</span>pwd<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                 msg<span class="token punctuation">:</span><span class="token string">"l两次输入的密码不一致"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h4 class="mume-header" id="_ajax_"><em>ajax()</em></h4>
+
+<p>参考 <code>工具类篇</code> 中的ajax，这里是直接通过 <code>mixin</code> 把那个 ajax 方法组合到这个类的</p>
+<h4 class="mume-header" id="_thisfind_"><em>this.find()</em></h4>
+
+<p>当想用jquery的<code>$()</code>来筛选元素时候，强烈建议用 <code>this.find()</code> 代替 <code>$()</code>，参数与<code>$()</code> 的参数完全相同</p>
+<h2 class="mume-header" id="qpageedit">Qpage.edit</h2>
+
+<p>继承自 Qpage.base ，这个类是专门给 <code>编辑</code> 模块提供的，常规的 <code>编辑</code> 模块的功能流程如下：</p>
+<blockquote>
+<ul>
+<li>回显各个 <code>input</code> 的值，参考 <code>Qbase.base</code> 的 <code>init</code> 方法</li>
+<li>当某 <code>input</code> 的值发生改变时，验证此值是否符合规则，参考  <code>Qbase.base</code> 的 <code>_validate(el)</code>  <code>p_getValidateRule</code></li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="%E4%BF%9D%E5%AD%98%E6%B5%81%E7%A8%8B">保存流程</h3>
+
+<blockquote>
+<p>通过 <code>p_getData</code> 方法获取 form 表单的值，<br>
+通过  <code>p_getValidateRule</code> 方法获取各个 dom 的验证规则<br>
+通过 <code>_validate(el)</code> 验证所有的 <code>input</code><br>
+如果没有通过验证，则调用 <code>p_showErrorMsg(errorMsg,el)</code> 显示错误信息<br>
+如果通过验证，则 通过 <code>ajax</code> 方法把数据提交 <code>form</code> 的 <code>action</code> 属性指定的 url 上</p>
+<blockquote>
+<p>如果服务的返回错误信息，则默认会调用 alert 提示错误信息<br>
+如果服务的返回正确，则会调用 <code>p_cb_submit</code> 处理后续操作</p>
+</blockquote>
+</blockquote>
+<p>这个类在 <code>Qbase.base</code> 的基础上，添加了以下方法<br>
+<img src="img/8.png" alt="url"></p>
+<h3 class="mume-header" id="%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95%E4%B8%BA">常规用法为：</h3>
+
+<pre class="language-javascript">    <span class="token comment" spellcheck="true">/*
+     * 通过main方法来生成一个继承 Qbase.edit 的匿名类，
+     * 并实例化这个匿名类，执行 init 方法
+     */</span>
+    Qpage<span class="token punctuation">.</span>edit<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        p_getValidateRule<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//返回各个input的验证规则</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//如果默认的错误提示不能满足需求，则可以重写这个方法来实现自己的错误提示</span>
+        p_showErrorMsg<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> el<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//msg 是要提示的错误信息</span>
+            <span class="token comment" spellcheck="true">//el 发生错误的 dom 元素 </span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        p_cb_submit<span class="token punctuation">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 提交成功返回后，这里写自己的逻辑，如返回上一页等等</span>
+            Qpage<span class="token punctuation">.</span><span class="token function">Alert</span><span class="token punctuation">(</span><span class="token punctuation">{</span> msg<span class="token punctuation">:</span> <span class="token string">"保存成功"</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h2 class="mume-header" id="qpagelist">Qpage.list</h2>
+
+<p>继承自 Qpage.edit ，这个类是专门给 <code>列表页</code> 提供的，常规的 <code>列表页</code> 模块的功能流程如下：</p>
+<blockquote>
+<ul>
+<li>回显筛选条件，参考 <code>Qpage.base</code> 的 <code>init</code> 方法</li>
+<li>刚打开页面时，会通过调用 <code>p_search_click</code> 方法来获取服务的数据</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="p_search_click-%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B%E5%A6%82%E4%B8%8B">p_search_click 的实现流程如下：</h3>
+
+<div class="mermaid">graph TD;
+    search[搜索按钮]--p_search_click-->event[点击事件]
+    event--p_getData-->data{获取搜索条件}
+    data--p_validate-->check{验证搜索条件}
+    check--成功-->server{提交到服务端}
+    check--失败-->tips{提示错误信息}
+    server--renderGrid-->grid[渲染列表]
+    server--renderPager-->page[渲染分页]
+</div>
+<p><img src="img/9.png" alt="url"><br>
+<img src="img/10.png" alt="url"></p>
+<h3 class="mume-header" id="%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95%E4%B8%BA-1">常规用法为：</h3>
+
+<pre class="language-javascript">    <span class="token comment" spellcheck="true">/*
+     * 通过main方法来生成一个继承 Qbase.list 的匿名类，
+     * 并实例化这个匿名类，执行 init 方法
+     */</span>
+    Qpage<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        getGridCols<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>header<span class="token punctuation">:</span> <span class="token string">"序号"</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token string">'{rowIndex}'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>header<span class="token punctuation">:</span> <span class="token string">"用户ID"</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token string">'{id}'</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>header<span class="token punctuation">:</span> <span class="token string">"昵称"</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token string">"{nickname}"</span> <span class="token punctuation">,</span>style<span class="token punctuation">:</span><span class="token punctuation">{</span>width<span class="token punctuation">:</span><span class="token number">80</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>header<span class="token punctuation">:</span> <span class="token string">"头像"</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token string">"&lt;img src='{avator}' />"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>header<span class="token punctuation">:</span> <span class="token string">"星座"</span><span class="token punctuation">,</span> html<span class="token punctuation">:</span> <span class="token string">"{ext.xingzuo}"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    header<span class="token punctuation">:</span> <span class="token string">"操作"</span><span class="token punctuation">,</span> render<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>el<span class="token punctuation">,</span> data<span class="token punctuation">,</span> rowIndex<span class="token punctuation">,</span> col<span class="token punctuation">,</span> cellIndex<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">var</span> html <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">' &lt;a action="update" class="btn btn-primary btn-sm" style="line-height:0.3">编辑&lt;/a>'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    html<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">'&lt;a qhistory="goto" href="/article/edit?id=\' + data.id + \'" class="btn btn-xs btn-info">查看日志&lt;/a>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    el<span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span>html<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"  "</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        p_update_click<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>e<span class="token punctuation">,</span> el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//todo</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        p_add_click<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>e<span class="token punctuation">,</span> el<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//todo</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h2 class="mume-header" id="qpagedialog">Qpage.Dialog</h2>
+
+<p>这是专门针对弹框做的类库，是在 <code>Qpage.edit</code> 的基础上，做了弹框的适配，弾层的规则是：</p>
+<blockquote>
+<p>如果一屏能显示完整个弾层内容，则弾层定位方式为 <code>fixed</code><br>
+如果一屏不能完整显示弾层的内容，则弾层定位方式为 <code>absolute</code><br>
+当弾层内容变化引起弾层高度也发生变化时，可以调用 <code>this.resize()</code> 方法改变弾层的定位方式</p>
+</blockquote>
+<blockquote>
+<p><strong>当在 <code>iframe</code> 内部调用Dialog时，弾层会在父页面上弹出来，此时，用 <code>$</code> 筛选元素时可能会不好用，此时，务必使用 <code>this.find（）</code> 来代替 <code>$（）</code></strong></p>
+</blockquote>
+<h3 class="mume-header" id="%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95">常规用法</h3>
+
+<pre class="language-javascript">    <span class="token comment" spellcheck="true">/*
+     * 通过main方法来生成一个继承 Qbase.Dialog 的匿名类，
+     * 并实例化这个匿名类，执行 init 方法
+     */</span>
+    Qpage<span class="token punctuation">.</span>Dialog<span class="token punctuation">.</span><span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        init<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//给弾层中的input赋值</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">parent</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//设置弾层的title</span>
+        v_getTitle<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token string">"修改启动广告图"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//设置弾层的的内容，返回 一段 html 字符串</span>
+        v_getContent<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#dialog"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//设置弾层的按钮 返回 一段 html 字符串</span>
+        v_getButton<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token string">'&lt;button class="btn btn-primary" id="save">保存&lt;/button> &lt;button class="btn" id="close">取消&lt;/button> '</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">// 同 Qpage.edit，这个是设置弾层中各个input 的验证规则</span>
+        p_getValidateRule<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token punctuation">{</span>
+                adnname<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+                        reg<span class="token punctuation">:</span> <span class="token regex">/^.+$/</span><span class="token punctuation">,</span>
+                        msg<span class="token punctuation">:</span> <span class="token string">"请输入名称"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                beginTime<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+                        reg<span class="token punctuation">:</span> <span class="token regex">/^.+$/</span><span class="token punctuation">,</span>
+                        msg<span class="token punctuation">:</span> <span class="token string">"请选择投放开始时间"</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">//同 Qpage.edit，服务的返回成功后的回调方法</span>
+        p_cb_submit<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Qpage<span class="token punctuation">.</span><span class="token function">Alert</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                msg<span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isEdit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">"修改成功"</span> <span class="token punctuation">:</span> <span class="token string">"添加成功"</span><span class="token punctuation">,</span>
+                confirm<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    self<span class="token punctuation">.</span><span class="token function">p_search_click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h2 class="mume-header" id="qpagealert">Qpage.Alert</h2>
+
+<p>基于 <code>Qpage.Dialog</code> 定制的 <code>alert</code> ，用法如下</p>
+<h3 class="mume-header" id="%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95-1">常规用法</h3>
+
+<pre class="language-javascript">    Qpage<span class="token punctuation">.</span><span class="token function">Alert</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        msg<span class="token punctuation">:</span> <span class="token string">"要显示的内容"</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">// 点击确定按钮会调用此方法</span>
+        confirm<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//todo</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+<h2 class="mume-header" id="qpageconfirm">Qpage.Confirm</h2>
+
+<p>基于 <code>Qpage.Dialog</code> 定制的 <code>confirm</code> ，用法如下</p>
+<h3 class="mume-header" id="%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95-2">常规用法</h3>
+
+<pre class="language-javascript">    Qpage<span class="token punctuation">.</span><span class="token function">Confirm</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        msg<span class="token punctuation">:</span> <span class="token string">"要提示的内容"</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">// 点击确定按钮会调用此方法</span>
+        confirm<span class="token punctuation">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//todo</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true">// 点击取消按钮会调用此方法</span>
+        cancel<span class="token punctuation">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">//todo</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</pre>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#qpagebase">Qpage.base</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95">使用方法：</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E6%88%96%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%98%AF">基本流程或生命周期是：</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6">事件机制</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84%E6%96%B9%E6%B3%95">一些重要的方法</a>
+<ul>
+<li><a href="#_p_setdatadata_"><em>p_setData(data)</em></a></li>
+<li><a href="#_p_getdata_"><em>p_getData()</em></a></li>
+<li><a href="#_p_validateel_"><em>p_validate(el)</em></a></li>
+<li><a href="#_p_getvalidaterule_"><em>p_getValidateRule()</em></a></li>
+<li><a href="#_ajax_"><em>ajax()</em></a></li>
+<li><a href="#_thisfind_"><em>this.find()</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#qpageedit">Qpage.edit</a>
+<ul>
+<li><a href="#%E4%BF%9D%E5%AD%98%E6%B5%81%E7%A8%8B">保存流程</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95%E4%B8%BA">常规用法为：</a></li>
+</ul>
+</li>
+<li><a href="#qpagelist">Qpage.list</a>
+<ul>
+<li><a href="#p_search_click-%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B%E5%A6%82%E4%B8%8B">p_search_click 的实现流程如下：</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95%E4%B8%BA-1">常规用法为：</a></li>
+</ul>
+</li>
+<li><a href="#qpagedialog">Qpage.Dialog</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95">常规用法</a></li>
+</ul>
+</li>
+<li><a href="#qpagealert">Qpage.Alert</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95-1">常规用法</a></li>
+</ul>
+</li>
+<li><a href="#qpageconfirm">Qpage.Confirm</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%84%E7%94%A8%E6%B3%95-2">常规用法</a></li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    <script>
+// config mermaid init call
+// http://knsv.github.io/mermaid/#configuration
+//
+// You can edit the 'MERMAID_CONFIG' variable below.
+MERMAID_CONFIG = {
+  startOnLoad: false
+}
+
+if (window['MERMAID_CONFIG']) {
+  window['MERMAID_CONFIG'].startOnLoad = false
+  window['MERMAID_CONFIG'].cloneCssStyles = false 
+}
+mermaidAPI.initialize(window['MERMAID_CONFIG'] || {})
+
+if (typeof(window['Reveal']) !== 'undefined') {
+  function mermaidRevealHelper(event) {
+    var currentSlide = event.currentSlide
+    var diagrams = currentSlide.querySelectorAll('.mermaid')
+    for (var i = 0; i < diagrams.length; i++) {
+      var diagram = diagrams[i]
+      if (!diagram.hasAttribute('data-processed')) {
+        mermaid.init(null, diagram, ()=> {
+          Reveal.slide(event.indexh, event.indexv)
+        })
+      }
+    }
+  }
+
+  Reveal.addEventListener('slidechanged', mermaidRevealHelper)
+  Reveal.addEventListener('ready', mermaidRevealHelper)
+} else {
+  mermaid.init(null, document.getElementsByClassName('mermaid'))
+}
+</script>
+    
+    
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>
